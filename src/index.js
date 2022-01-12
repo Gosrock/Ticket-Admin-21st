@@ -1,3 +1,5 @@
+import 'antd/dist/antd.min.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -8,7 +10,7 @@ import reducers from './reducers';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { Route, Routes } from 'react-router-dom';
-import LoginPage from './components/views/AuthPage/LoginPage';
+import LoginPage from './components/AuthPage/LoginPage';
 import requireAuth from './hoc/requireAuth';
 
 // 리덕스 데브툴 을 위한 세팅
