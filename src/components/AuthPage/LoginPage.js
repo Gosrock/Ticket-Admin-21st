@@ -1,8 +1,8 @@
 import React from 'react';
+import LoginForm from './LoginForm';
 import AuthForm from './AuthForm';
-
 const LoginPage = () => {
-  return <AuthForm type="login" />;
+  return <LoginForm />;
 };
 
 export default LoginPage;

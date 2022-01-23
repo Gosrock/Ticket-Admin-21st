@@ -13,7 +13,7 @@ import { Route, Routes } from 'react-router-dom';
 import requireAuth from './hoc/requireAuth';
 import LoginPage from './components/AuthPage/LoginPage';
 import RegisterPage from './components/AuthPage/RegisterPage';
-
+import AuthForm from './components/AuthPage/AuthForm';
 // 리덕스 데브툴 을 위한 세팅
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -47,7 +47,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <Routes>
-        <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path="/login" element={<AuthForm />} />
         <Route path="/*" element={<AppWithLogin />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>

@@ -1,27 +1,44 @@
-import { AUTH_USER, AUTH_ERROR } from './types';
-import axios from 'axios';
+import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
 
-export const login =
-  ({ userId, password }, callback) =>
-  async dispatch => {
-    try {
-      // dispatch({ type: AUTH });
+const CHANGE_FIELD = 'auth/CHANGE_FIELD';
+const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 
-      const response = await axios.post('/api/admin/account/login', {
-        userId,
-        password
-      });
-      console.log('액션', response);
+export const changeField = createAction(
+  CHANGE_FIELD,
+  ({ form, key, value }) => ({
+    form, //register, login
+    key, //username, password, passwordConfirm
+    value //실제 바꾸려는 값
+  })
+);
+export const initializeForm = createAction(INITIALIZE_FORM, form => form);
+//register/login
 
-      dispatch({ type: AUTH_USER, payload: response.data });
+const initialState = {
+  register: {
+    username: '',
+    password: '',
+    passwordConfirm: ''
+  },
+  login: {
+    username: '',
+    password: ''
+  }
+};
 
-      localStorage.setItem('accessToken', response.data.data.accessToken);
-      axios.defaults.headers.common.Authorization = `Bearer ${response.data.data.accessToken}`;
+const auth = handleActions(
+  {
+    [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
+      produce(state, draft => {
+        draft[form][key] = value; //예: state.register.username을 바꾼다
+      }),
+    [INITIALIZE_FORM]: (state, { payload: form }) => ({
+      ...state,
+      [form]: initialState[form]
+    })
+  },
+  initialState
+);
 
-      // 자동으로 피쳐로 넘어가게끔
-      // callback();
-    } catch (e) {
-      //400 ~
-      dispatch({ type: AUTH_ERROR, payload: '로그인 실패' });
-    }
-  };
+export default auth;

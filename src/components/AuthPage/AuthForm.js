@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { login } from '../../actions/auth';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './AuthForm.css';
@@ -14,35 +10,10 @@ const textMap = {
   register: '관리자 회원가입'
 };
 
-const AuthForm = ({ type }) => {
+const AuthForm = ({ type, form, onChange, onSubmit }) => {
+  console.log(type);
   const text = textMap[type];
   console.log([text]);
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
-
-  const { authenticated, errorMessage, pending } = useSelector(
-    state => state.auth
-  );
-
-  const onSubmitHandler = values => {
-    // event.preventDefault();
-    let body = {
-      userId: values.email,
-      password: values.password
-    };
-    console.log(body);
-
-    // login 요청
-    dispatch(login(body)).then(res => {
-      console.log(authenticated, errorMessage, pending, res);
-
-      if (!errorMessage) {
-        navigate('/');
-      } else {
-        alert(errorMessage);
-      }
-    });
-  };
 
   const Footer = styled.div`
     margin-top: 2rem;
@@ -55,6 +26,7 @@ const AuthForm = ({ type }) => {
       }
     }
   `;
+
   return (
     <div
       style={{
@@ -72,7 +44,7 @@ const AuthForm = ({ type }) => {
         initialValues={{
           remember: true
         }}
-        onFinish={onSubmitHandler}
+        onFinish={onSubmit}
       >
         <h2>{text}</h2>
 
@@ -88,11 +60,13 @@ const AuthForm = ({ type }) => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="email"
+            //onChange={onChange}
+            //value={form.username}
           />
         </Form.Item>
 
         <Form.Item
-          name="password1"
+          name="password"
           rules={[
             {
               required: true,
@@ -109,7 +83,7 @@ const AuthForm = ({ type }) => {
 
         {type === 'register' && (
           <Form.Item
-            name="password2"
+            name="passwordConfirm"
             rules={[
               {
                 required: true,
