@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeField, initializeForm } from '../../actions/auth';
+import { changeField, initializeForm } from '../../modules/auth';
 import AuthForm from './AuthForm';
 
 const RegisterForm = () => {
