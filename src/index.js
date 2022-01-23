@@ -10,8 +10,9 @@ import reducers from './reducers';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { Route, Routes } from 'react-router-dom';
-import LoginPage from './components/AuthPage/LoginPage';
 import requireAuth from './hoc/requireAuth';
+import LoginPage from './components/AuthPage/LoginPage';
+import RegisterPage from './components/AuthPage/RegisterPage';
 
 // 리덕스 데브툴 을 위한 세팅
 const composeEnhancers =
@@ -48,6 +49,7 @@ ReactDOM.render(
       <Routes>
         <Route exact path="/login" element={<LoginPage />} />
         <Route path="/*" element={<AppWithLogin />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </Provider>
   </BrowserRouter>,
