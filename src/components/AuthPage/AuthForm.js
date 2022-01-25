@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
@@ -10,10 +10,10 @@ const textMap = {
   register: '관리자 회원가입'
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
-  console.log(type);
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
+  //console.log(type);
   const text = textMap[type];
-  console.log([text]);
+  //console.log([text]);
 
   const Footer = styled.div`
     margin-top: 2rem;
@@ -27,6 +27,13 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
     }
   `;
 
+  const ErrorMessage = styled.div`
+    color: red;
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+  `;
+
   return (
     <div
       style={{
@@ -38,86 +45,82 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
         flexDirection: 'column'
       }}
     >
+      <h2>{text}</h2>
       <Form
         name="normal_login"
         className="login-form"
         initialValues={{
           remember: true
         }}
-        //onFinish={onSubmit}
+        onSubmit={onSubmit}
       >
-        <h2>{text}</h2>
-        <form onSubmit={onSubmit}>
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: '아이디를 입력해 주세요'
-              }
-            ]}
-          >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              name="username"
-              placeholder="email"
-              onChange={onChange}
-              value={form.username}
-            />
-          </Form.Item>
-
-          <Form.Item
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: '아이디를 입력해 주세요'
+            }
+          ]}
+        >
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            name="username"
+            placeholder="email"
+            onChange={onChange}
+            value={form.username}
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: '비밀번호를 입력해주세요'
+            }
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
             name="password"
+            placeholder="Password"
+            type="password"
+            onChange={onChange}
+            value={form.password}
+          />
+        </Form.Item>
+        {type === 'register' && (
+          <Form.Item
+            name="passwordConfirm"
             rules={[
               {
                 required: true,
-                message: '비밀번호를 입력해주세요'
+                message: '비밀번호를 한번 더 입력해주세요'
               }
             ]}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
-              name="password"
-              placeholder="Password"
+              name="passwordConfirm"
               type="password"
+              placeholder="Password check"
               onChange={onChange}
-              value={form.password}
+              value={form.passwordConfirm}
             />
           </Form.Item>
-
-          {type === 'register' && (
-            <Form.Item
-              name="passwordConfirm"
-              rules={[
-                {
-                  required: true,
-                  message: '비밀번호를 한번 더 입력해주세요'
-                }
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                name="passwordConfirm"
-                type="password"
-                placeholder="Password check"
-                onChange={onChange}
-                value={form.passwordConfirm}
-              />
-            </Form.Item>
-          )}
-
-          <Form.Item>
-            <Button
-              style={{ float: 'right' }}
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              {type}
-              {'  '}
-            </Button>
-          </Form.Item>
-        </form>
+        )}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <Form.Item>
+          <Button
+            style={{ float: 'right' }}
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            {text}
+            {'  '}
+          </Button>
+        </Form.Item>
       </Form>
 
       <Footer>
