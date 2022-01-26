@@ -44,80 +44,79 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
         initialValues={{
           remember: true
         }}
-        //onFinish={onSubmit}
+        onSubmit={onSubmit}
       >
         <h2>{text}</h2>
-        <form onSubmit={onSubmit}>
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: '아이디를 입력해 주세요'
-              }
-            ]}
-          >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              name="username"
-              placeholder="email"
-              onChange={onChange}
-              value={form.username}
-            />
-          </Form.Item>
 
-          <Form.Item
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: '아이디를 입력해 주세요'
+            }
+          ]}
+        >
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            name="username"
+            placeholder="email"
+            onChange={onChange}
+            value={form.username}
+          />
+        </Form.Item>
+
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: '비밀번호를 입력해주세요'
+            }
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
             name="password"
+            placeholder="Password"
+            type="password"
+            onChange={onChange}
+            value={form.password}
+          />
+        </Form.Item>
+
+        {type === 'register' && (
+          <Form.Item
+            name="passwordConfirm"
             rules={[
               {
                 required: true,
-                message: '비밀번호를 입력해주세요'
+                message: '비밀번호를 한번 더 입력해주세요'
               }
             ]}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
-              name="password"
-              placeholder="Password"
+              name="passwordConfirm"
               type="password"
+              placeholder="Password check"
               onChange={onChange}
-              value={form.password}
+              value={form.passwordConfirm}
             />
           </Form.Item>
+        )}
 
-          {type === 'register' && (
-            <Form.Item
-              name="passwordConfirm"
-              rules={[
-                {
-                  required: true,
-                  message: '비밀번호를 한번 더 입력해주세요'
-                }
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                name="passwordConfirm"
-                type="password"
-                placeholder="Password check"
-                onChange={onChange}
-                value={form.passwordConfirm}
-              />
-            </Form.Item>
-          )}
-
-          <Form.Item>
-            <Button
-              style={{ float: 'right' }}
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              {type}
-              {'  '}
-            </Button>
-          </Form.Item>
-        </form>
+        <Form.Item>
+          <Button
+            style={{ float: 'right' }}
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            {type}
+            {'  '}
+          </Button>
+        </Form.Item>
       </Form>
 
       <Footer>

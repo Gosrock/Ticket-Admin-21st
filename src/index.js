@@ -14,8 +14,8 @@ import LoginPage from './components/AuthPage/LoginPage';
 import RegisterPage from './components/AuthPage/RegisterPage';
 import AuthForm from './components/AuthPage/AuthForm';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './modules';
-
+import rootReducer, { rootSaga } from './modules';
+import createSagaMiddleWare from 'redux-saga';
 // 리덕스 데브툴 을 위한 세팅
 /*
 const composeEnhancers =
@@ -32,7 +32,13 @@ const composeEnhancers =
 // axios Bearer 토큰에 커먼 헤더로 껴놓기 위함
 // axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
-const store = createStore(rootReducer, composeWithDevTools());
+const sagaMiddleWare = createSagaMiddleWare();
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleWare))
+);
+sagaMiddleWare.run(rootSaga);
 
 // hoc로 감싸기 위해서는 한번이렇게 hoc에서 리턴받아서 돔에 집어넣어야함
 const AppWithLogin = requireAuth(App);
