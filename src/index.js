@@ -8,7 +8,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { Route, Routes } from 'react-router-dom';
 import requireAuth from './hoc/requireAuth';
 import LoginPage from './components/AuthPage/LoginPage';
 import RegisterPage from './components/AuthPage/RegisterPage';
@@ -16,6 +15,14 @@ import AuthForm from './components/AuthPage/AuthForm';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer, { rootSaga } from './modules';
 import createSagaMiddleWare from 'redux-saga';
+import history from './history';
+import {
+  Routes,
+  Route,
+  unstable_HistoryRouter as HistoryRouter
+} from 'react-router-dom';
+import { tempSetUser, check } from './modules/user';
+import { load } from 'dotenv';
 // 리덕스 데브툴 을 위한 세팅
 /*
 const composeEnhancers =
@@ -23,6 +30,18 @@ const composeEnhancers =
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 */
+
+function loadUser() {
+  try {
+    const user = localStorage.getItem('user');
+    if (!user) return;
+    store.dispatch(tempSetUser(JSON.parse(user)));
+    store.dispatch(check());
+  } catch (e) {
+    console.log('localStorage is not working');
+  }
+}
+
 // other store enhancers if any
 //const enhancer = composeEnhancers(applyMiddleware(reduxThunk));
 
@@ -39,19 +58,21 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleWare))
 );
 sagaMiddleWare.run(rootSaga);
-
+loadUser();
 // hoc로 감싸기 위해서는 한번이렇게 hoc에서 리턴받아서 돔에 집어넣어야함
 const AppWithLogin = requireAuth(App);
-
+/*<Route exact path="/login" element={<LoginPage />} />
+        <Route path="/*" element={<AppWithLogin />} />
+        <Route path="/register" element={<RegisterPage />} />*/
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <Routes>
         <Route exact path="/login" element={<LoginPage />} />
         <Route path="/*" element={<AppWithLogin />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   </Provider>,
 
   document.getElementById('root')

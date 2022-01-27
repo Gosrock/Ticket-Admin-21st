@@ -1,15 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from './AuthForm';
+import { check } from '../../modules/user';
+import { withNavigation } from '../../hoc/withRouterForClass';
+import { useNavigate } from 'react-router-dom';
+import history from '../../history';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }) => ({
+  const [error, setError] = useState(null);
+  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
     form: auth.register,
     auth: auth.auth,
-    authError: auth.authError
+    authError: auth.authError,
+    user: user.user
   }));
+  const navigate = useNavigate();
 
   //인풋 변경 이벤트 핸들러
   const onChange = e => {
@@ -26,9 +33,15 @@ const RegisterForm = () => {
   //폼 등록 이벤트 핸들러
 
   const onSubmit = e => {
-    e.preventDefault();
+    //e.preventDefault();
     const { username, password, passwordConfirm } = form;
+
     if (password !== passwordConfirm) {
+      setError('비밀번호가 일치하지 않습니다.');
+      dispatch(changeField({ form: 'register', key: 'password', value: '' }));
+      dispatch(
+        changeField({ form: 'register', key: 'passwordConfirm', value: '' })
+      );
       return;
     }
     dispatch(register({ username, password }));
@@ -41,15 +54,31 @@ const RegisterForm = () => {
 
   useEffect(() => {
     if (authError) {
-      console.log('오류발생');
-      console.log(authError);
-      return;
+      if (authError.response.status === 409) {
+        setError('이미 존재하는 계정입니다.');
+        return;
+      }
+      setError('회원가입 실패');
     }
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
+      dispatch(check());
     }
-  }, [auth, authError]);
+  }, [auth, authError, dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      console.log('check API 성공');
+      console.log(user);
+      navigate('/');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log('localStarage is not working');
+      }
+    }
+  }, [navigate, user]);
 
   return (
     <div>
@@ -58,9 +87,10 @@ const RegisterForm = () => {
         form={form}
         onChange={onChange}
         onSubmit={onSubmit}
+        error={error}
       />
     </div>
   );
 };
 
-export default RegisterForm;
+export default withNavigation(RegisterForm);

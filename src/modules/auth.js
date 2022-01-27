@@ -46,11 +46,13 @@ const initialState = {
   register: {
     username: '',
     password: '',
-    passwordConfirm: ''
+    passwordConfirm: '',
+    authenticated: null
   },
   login: {
     username: '',
-    password: ''
+    password: '',
+    authenticated: null
   },
   auth: null,
   authError: null
@@ -69,7 +71,8 @@ const auth = handleActions(
     [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth
+      auth,
+      authenticated: true
     }),
     [REGISTER_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -78,7 +81,8 @@ const auth = handleActions(
     [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth
+      auth,
+      authenticated: true
     }),
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,

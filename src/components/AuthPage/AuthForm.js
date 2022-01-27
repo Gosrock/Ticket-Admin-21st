@@ -10,10 +10,16 @@ const textMap = {
   register: '관리자 회원가입'
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
-  console.log(type);
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+`;
+
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
-  console.log([text]);
 
   const Footer = styled.div`
     margin-top: 2rem;
@@ -44,7 +50,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
         initialValues={{
           remember: true
         }}
-        onSubmit={onSubmit}
+        onFinish={onSubmit}
       >
         <h2>{text}</h2>
 
@@ -105,7 +111,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             />
           </Form.Item>
         )}
-
+        {<ErrorMessage>{error}</ErrorMessage>}
         <Form.Item>
           <Button
             style={{ float: 'right' }}
