@@ -1,16 +1,13 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
-import { login } from '../../actions/auth';
+import { login } from '../../state/actions-creators';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './loginpage.css';
 
 function LoginPage(props) {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
 
   const { authenticated, errorMessage, pending } = useSelector(
     state => state.auth
@@ -25,16 +22,15 @@ function LoginPage(props) {
     console.log(body);
 
     // login 요청
-    dispatch(login(body)).then(res => {
-      console.log(authenticated, errorMessage, pending, res);
-
-      if (!errorMessage) {
-        navigate('/');
-      } else {
-        alert(errorMessage);
-      }
-    });
+    dispatch(login(body));
   };
+
+  useEffect(() => {
+    console.log(errorMessage);
+    if (errorMessage && !pending) {
+      alert('로그인실패');
+    }
+  }, [errorMessage, pending]);
 
   return (
     <div

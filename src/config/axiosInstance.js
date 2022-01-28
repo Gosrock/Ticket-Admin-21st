@@ -1,5 +1,5 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost';
+axios.defaults.baseURL = 'https://api.gosrock.link';
 // const instance = axios.create({
 //   // .. where we make our configurations
 //   baseURL: "http://localhost",
