@@ -1,4 +1,9 @@
-import { AUTH_USER, AUTH_ERROR, AUTH } from '../actions/types';
+import {
+  AUTH_LOGIN_PENDIG,
+  AUTH_LOGIN_USER,
+  AUTH_LOGIN_ERROR,
+  LOGOUT_USER
+} from '../action-types';
 
 const INITIAL_STATE = {
   authenticated: null,
@@ -8,27 +13,35 @@ const INITIAL_STATE = {
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function (state = INITIAL_STATE, action) {
+export const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case AUTH:
+    case AUTH_LOGIN_PENDIG:
       console.log(action.type, action.payload);
-      return { ...state, pending: true };
-    case AUTH_USER:
+      return { ...state, errorMessage: null, pending: true };
+    case AUTH_LOGIN_USER:
       return {
         ...state,
-        authenticated: action.payload.data.accessToken,
+        authenticated: action.payload.data.adminAccessToken,
         userInfo: action.payload.data,
         errorMessage: null,
         pending: false
       };
-    case AUTH_ERROR:
+    case AUTH_LOGIN_ERROR:
       return {
         ...state,
         authenticated: null,
         errorMessage: action.payload,
         pending: false
       };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        userInfo: null,
+        authenticated: null,
+        errorMessage: null,
+        pending: false
+      };
     default:
       return state;
   }
-}
+};
