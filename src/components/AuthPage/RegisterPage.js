@@ -11,16 +11,17 @@ function RegisterPage(props) {
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const { errorMessage, pending } = useSelector(state => state.auth);
-
+  const [initialValue, setInitialvalue] = useState({});
+  const [form] = Form.useForm();
   const onSubmitHandler = values => {
     // event.preventDefault();
-    const { password, passwordConfirm } = values;
+    const { Id, name, gosrockCode, password, passwordConfirm } = values;
     console.log(password, passwordConfirm);
     if (password !== passwordConfirm) {
       setError('비밀번호가 일치하지 않습니다.');
-      dispatch(
-        initializeForm({ userId: '', password: '', passwordConfirm: '' })
-      );
+      console.log(values);
+      form.resetFields(['password', 'passwordConfirm']);
+      console.log('비밀번호불일치 initialize');
       return;
     }
     let body = {
@@ -61,11 +62,10 @@ function RegisterPage(props) {
       }}
     >
       <Form
+        form={form}
         name="normal_login"
         className="login-form"
-        initialValues={{
-          remember: true
-        }}
+        initialValues={initialValue}
         onFinish={onSubmitHandler}
       >
         <h2> 관리자 회원가입</h2>

@@ -68,7 +68,7 @@ export const auth = (state = INITIAL_STATE, action) => {
     case AUTH_INITIALIZEFORM:
       return {
         ...state,
-        data: []
+        data: action.payload
       };
     default:
       return state;
