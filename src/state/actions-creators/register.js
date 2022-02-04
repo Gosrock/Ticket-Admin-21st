@@ -34,9 +34,5 @@ export const register =
         type: AUTH_REGISTER_ERROR,
         payload: e.response.data.message
       });
-      dispatch({
-        type: AUTH_INITIALIZEFORM,
-        payload: 'REGISTER Initialize Form'
-      });
     }
   };
