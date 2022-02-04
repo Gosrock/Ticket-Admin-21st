@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ticket } from '../../state/actions-creators';
 import axios from 'axios';
-import { Yezin } from './Yezin';
-export default function Ticket(props) {
+import { InformBox } from './InformBox';
+const Ticket = props => {
   /*const dispatch = useDispatch();
   let body = {
     issuedTickets: '',
@@ -30,27 +30,66 @@ export default function Ticket(props) {
 
   console.log('data', data);
   return (
-    <div
-      style={{
-        display: 'flex'
-      }}
-    >
-      {data ? (
-        <Yezin
-          style={{
-            marginRight: '100px'
-          }}
-          data={data.issuedTickets}
-          title={'링크 발급된 티켓'}
-        >
-          {' '}
-        </Yezin>
-      ) : (
-        <div>로딩중</div>
-      )}
+    <div style={{ display: 'flex' }}>
+      <ul>
+        <li style={{ fontSize: '20px', marginBottom: '20px' }}>티켓 관련</li>
 
-      <h2> 입금확인 </h2>
-      <h2>판매대금 </h2>
+        {data ? (
+          <div>
+            <InformBox data={data.issuedTickets} title={'링크 발급된 티켓'}>
+              {' '}
+            </InformBox>
+
+            <InformBox data={data.confirmedDeposit} title={'입금 확인된 티켓'}>
+              {' '}
+            </InformBox>
+
+            <InformBox data={data.salesProceeds} title={'판매대금'}>
+              {' '}
+            </InformBox>
+          </div>
+        ) : (
+          <div style={{ marginBottom: '30px' }}>로딩중입니다.</div>
+        )}
+
+        <li style={{ fontSize: '20px', marginBottom: '20px' }}>입금 관련</li>
+        {data ? (
+          <div>
+            <InformBox data={data.confirmedDeposit} title={'입금 확인 완료'}>
+              {' '}
+            </InformBox>
+
+            <InformBox data={data.pendingDeposit} title={'입금 확인 중'}>
+              {' '}
+            </InformBox>
+
+            <InformBox data={data.nonDeposit} title={'미입금 처리'}>
+              {' '}
+            </InformBox>
+          </div>
+        ) : (
+          <div style={{ marginBottom: '30px' }}>로딩중입니다.</div>
+        )}
+
+        <li style={{ fontSize: '20px', marginBottom: '20px' }}>
+          입장 확인 관련
+        </li>
+        {data ? (
+          <div>
+            <InformBox data={data.entered} title={'입장 확인된 티켓'}>
+              {' '}
+            </InformBox>
+
+            <InformBox data={data.notEntered} title={'입장 확인 안 된 티켓'}>
+              {' '}
+            </InformBox>
+          </div>
+        ) : (
+          <div style={{ marginBottom: '30px' }}>로딩중입니다.</div>
+        )}
+      </ul>
     </div>
   );
-}
+};
+
+export default Ticket;

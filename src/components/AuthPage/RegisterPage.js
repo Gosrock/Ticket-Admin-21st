@@ -41,14 +41,16 @@ function RegisterPage(props) {
       console.log(errorMessage);
       if (errorMessage === '중복가입') {
         setError('중복가입입니다.');
+        form.resetFields(['Id', 'name']);
         return;
       }
       if (errorMessage === '코드오류') {
         setError('고스락 인증 코드가 다릅니다.');
+        form.resetFields(['gosrockCode']);
         return;
       }
     }
-  }, [errorMessage]);
+  }, [form, errorMessage]);
 
   return (
     <div
