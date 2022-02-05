@@ -1,8 +1,8 @@
 import {
-  TICKET_INFORMATION,
-  TICKET_INFORMATION_ERROR,
-  TICKET_INFORMATION_PENDING
-} from '../action-types/ticket';
+  TICKET_LOOKUP,
+  TICKET_LOOKUP_ERROR,
+  TICKET_LOOKUP_PENDING
+} from '../action-types/ticketLookUp';
 
 const INITIAL_STATE = {
   ticketInfo: null,
@@ -11,19 +11,18 @@ const INITIAL_STATE = {
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export const auth = (state = INITIAL_STATE, action) => {
+export const ticket = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TICKET_INFORMATION_PENDING:
-      console.log(action.type, action.payload);
+    case TICKET_LOOKUP_PENDING:
       return { ...state, errorMessage: null, pending: true };
-    case TICKET_INFORMATION:
+    case TICKET_LOOKUP:
       return {
         ...state,
-        ticketInfo: action.payload.data,
+        ticketInfo: action.payload,
         errorMessage: null,
         pending: false
       };
-    case TICKET_INFORMATION_ERROR:
+    case TICKET_LOOKUP_ERROR:
       return {
         ...state,
         errorMessage: action.payload,
