@@ -1,0 +1,28 @@
+.InformBox {
+  width: 200px;
+  border-radius: 5px;
+  background: white;
+  color: red;
+  height: 120px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  cursor: pointer;
+  vertical-align: auto;
+  float: left;
+  
+}
+.text {
+  margin-left: 17pt;
+  color: rgb(185, 185, 185);
+  font-size: 14px;
+  justify-content : left;
+  text-align: left;
+}
+/*
+@font-face{
+  font-family: "NotoSansKR";
+  src: url("src/font/NotoSansKR.otf");
+}
+*/

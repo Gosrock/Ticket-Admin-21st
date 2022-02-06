@@ -4,19 +4,18 @@ import {
   AUTH_LOGIN_ERROR,
   AUTH_INITIALIZEFORM
 } from '../action-types/login';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import history from '../../config/history';
 
-export const initializeForm = data => ({
-  type: AUTH_INITIALIZEFORM,
-  payload: data
-});
+export const initializeForm = data => dispatch => {
+  dispatch({ type: AUTH_INITIALIZEFORM, payload: data });
+};
+
 export const login =
   ({ userId, password }, callback) =>
   async dispatch => {
     try {
       dispatch({ type: AUTH_LOGIN_PENDING });
-
       const response = await axios.post('/admin/login', {
         userId,
         password

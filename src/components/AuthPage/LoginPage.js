@@ -65,7 +65,7 @@ function LoginPage(props) {
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="email"
+            placeholder="username: admin or user"
           />
         </Form.Item>
         <Form.Item
