@@ -12,16 +12,10 @@ export const InformBox = ({ data, title, ...props }) => {
         marginBottom: '20px'
       }}
     >
-      <div className="text">
-        {title}
-        <br />
-        <big>
-          <big>
-            <big>
-              <big>{data}</big>
-            </big>
-          </big>
-        </big>
+      <div>
+        <div className="text1">{title}</div>
+
+        <div className="text2">{data}</div>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@
   float: left;
   
 }
-.text {
+.text1 {
   margin-left: 17pt;
   color: rgb(185, 185, 185);
   font-size: 14px;
@@ -26,3 +26,10 @@
   src: url("src/font/NotoSansKR.otf");
 }
 */
+.text2 {
+  margin-left: 17pt;
+  color: rgb(185, 185, 185);
+  font-size: 30px;
+  justify-content : left;
+  text-align: left;
+}
