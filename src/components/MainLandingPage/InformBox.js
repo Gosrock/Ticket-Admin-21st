@@ -1,6 +1,4 @@
 import './InformBox.css';
-import styled from 'styled-components';
-import Column from 'antd/lib/table/Column';
 
 export const InformBox = ({ data, title, ...props }) => {
   return (
