@@ -65,11 +65,13 @@ export const auth = (state = INITIAL_STATE, action) => {
         errorMessage: null,
         pending: false
       };
+
     case AUTH_INITIALIZEFORM:
       return {
         ...state,
         data: action.payload
       };
+
     default:
       return state;
   }

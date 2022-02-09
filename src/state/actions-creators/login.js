@@ -16,6 +16,7 @@ export const login =
   async dispatch => {
     try {
       dispatch({ type: AUTH_LOGIN_PENDING });
+
       const response = await axios.post('/admin/login', {
         userId,
         password
