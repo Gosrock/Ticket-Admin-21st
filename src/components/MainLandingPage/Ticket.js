@@ -28,11 +28,14 @@ const Ticket = props => {
     fetchData();
   }, []);
 
-  console.log('data', data);
   return (
     <div style={{ display: 'flex' }}>
       <ul>
-        <li style={{ fontSize: '20px', marginBottom: '20px' }}>티켓 관련</li>
+        <p
+          style={{ fontWeight: 'bold', fontSize: '14px', marginBottom: '20px' }}
+        >
+          티켓 관련
+        </p>
 
         {data ? (
           <div>
@@ -52,7 +55,11 @@ const Ticket = props => {
           <div style={{ marginBottom: '30px' }}>로딩중입니다.</div>
         )}
 
-        <li style={{ fontSize: '20px', marginBottom: '20px' }}>입금 관련</li>
+        <p
+          style={{ fontWeight: 'bold', fontSize: '14px', marginBottom: '20px' }}
+        >
+          입금 관련
+        </p>
         {data ? (
           <div>
             <InformBox data={data.confirmedDeposit} title={'입금 확인 완료'}>
@@ -71,9 +78,11 @@ const Ticket = props => {
           <div style={{ marginBottom: '30px' }}>로딩중입니다.</div>
         )}
 
-        <li style={{ fontSize: '20px', marginBottom: '20px' }}>
+        <p
+          style={{ fontWeight: 'bold', fontSize: '14px', marginBottom: '20px' }}
+        >
           입장 확인 관련
-        </li>
+        </p>
         {data ? (
           <div>
             <InformBox data={data.entered} title={'입장 확인된 티켓'}>

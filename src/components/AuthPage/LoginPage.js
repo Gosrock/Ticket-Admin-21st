@@ -14,7 +14,7 @@ function LoginPage(props) {
   const onSubmitHandler = values => {
     // event.preventDefault();
     let body = {
-      userId: values.email,
+      userId: values.Id,
       password: values.password
     };
     console.log(body);
@@ -55,7 +55,7 @@ function LoginPage(props) {
       >
         <h2> 관리자 로그인</h2>
         <Form.Item
-          name="email"
+          name="Id"
           rules={[
             {
               required: true,
@@ -65,7 +65,7 @@ function LoginPage(props) {
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="email"
+            placeholder="Id"
           />
         </Form.Item>
         <Form.Item

@@ -5,7 +5,7 @@ import {
 } from '../action-types/register';
 import axios from 'axios';
 import history from '../../config/history';
-import { AUTH_INITIALIZEFORM } from '../action-types';
+import { AUTH_INITIALIZEFORM, AUTH_LOGIN_PENDING } from '../action-types';
 
 export const register =
   ({ userId, password, name, gosrockCode }, callback) =>

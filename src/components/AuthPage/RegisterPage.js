@@ -152,7 +152,8 @@ function RegisterPage(props) {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              flexDirection: 'column'
+              flexDirection: 'column',
+              color: 'red'
             }}
           >
             {error}

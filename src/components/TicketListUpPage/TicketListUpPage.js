@@ -6,7 +6,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { Table, Input, Select, Button, Avatar, Image } from 'antd';
 import moment from 'moment';
 import { ticketLookUp } from '../../state/actions-creators';
-
+//import { StateIcon } from 'gosrock-storybook';
 const { Column } = Table;
 const { Option } = Select;
 
