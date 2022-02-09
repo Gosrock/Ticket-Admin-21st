@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { login } from '../../state/actions-creators';
+import { Link } from 'react-router-dom';
+import { initializeForm, login } from '../../state/actions-creators';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './loginpage.css';
@@ -9,14 +9,12 @@ import './loginpage.css';
 function LoginPage(props) {
   const dispatch = useDispatch();
 
-  const { authenticated, errorMessage, pending } = useSelector(
-    state => state.auth
-  );
+  const { errorMessage, pending } = useSelector(state => state.auth);
 
   const onSubmitHandler = values => {
     // event.preventDefault();
     let body = {
-      userId: values.email,
+      userId: values.Id,
       password: values.password
     };
     console.log(body);
@@ -27,10 +25,14 @@ function LoginPage(props) {
 
   useEffect(() => {
     console.log(errorMessage);
-    if (errorMessage && !pending) {
+    /*if (errorMessage && !pending) {
       alert('로그인실패');
-    }
+    }*/
   }, [errorMessage, pending]);
+
+  useEffect(() => {
+    dispatch(initializeForm());
+  }, [dispatch]);
 
   return (
     <div
@@ -53,17 +55,17 @@ function LoginPage(props) {
       >
         <h2> 관리자 로그인</h2>
         <Form.Item
-          name="email"
+          name="Id"
           rules={[
             {
               required: true,
-              message: '아이디 입력해 주세요'
+              message: '아이디를 입력해 주세요'
             }
           ]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="email"
+            placeholder="Id"
           />
         </Form.Item>
         <Form.Item
@@ -71,7 +73,7 @@ function LoginPage(props) {
           rules={[
             {
               required: true,
-              message: '비밀번호입력해주세요'
+              message: '비밀번호를 입력해주세요'
             }
           ]}
         >
@@ -92,6 +94,17 @@ function LoginPage(props) {
             로그인{' '}
           </Button>
         </Form.Item>
+      </Form>
+
+      <Form
+        style={{
+          alignItems: 'center',
+          color: 'gray'
+        }}
+      >
+        <Link to="/register" className="Footer">
+          회원가입
+        </Link>
       </Form>
     </div>
   );
