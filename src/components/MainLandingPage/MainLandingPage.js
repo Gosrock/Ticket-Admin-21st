@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 
 import TicketListUpPage from '../TicketListUpPage/TicketListUpPage';
 import history from '../../config/history';
-
+import Ticket from './Ticket';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   AreaChartOutlined,
@@ -93,8 +93,8 @@ const MainLandingPage = () => {
             <Routes>
               <Route exact path="/tickets" element={<TicketListUpPage />} />
               <Route exact path="/logout" element={<LogoutPage />} />
-              <Route exact path="/enter" element={<div>입장확인</div>} />
-              <Route exact path="/statics" element={<div>통계임다</div>} />
+              <Route exact path="/enter" element={<div>입장확인임다</div>} />
+              <Route exact path="/statics" element={<Ticket />} />
               <Route path="*" element={<Navigate to="/statics" />} />
             </Routes>
           </div>
