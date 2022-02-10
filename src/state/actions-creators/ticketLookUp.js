@@ -49,12 +49,13 @@ export const changeState =
         status: e,
         _id: _id
       });
+      console.log(response.data);
       dispatch({ type: STATE_CHANGE, payload: response.data.data });
     } catch (e) {
+      console.log(e);
       dispatch({
         type: STATE_CHANGE_ERROR,
-        payload: e.response.data.message
+        payload: e.response.data
       });
-      console.log(e.response.data.data);
     }
   };

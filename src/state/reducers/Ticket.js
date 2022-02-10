@@ -32,16 +32,26 @@ export const ticket = (state = INITIAL_STATE, action) => {
       };
 
     case STATE_CHANGE:
+      const newTicketList = state.ticketInfo.ticketList.map(element => {
+        if (element._id === action.payload._id) {
+          return action.payload;
+        }
+        return element;
+      });
+
       return {
         ...state,
-        ticketInfo: action.payload,
+        ticketInfo: {
+          totalResultCount: state.ticketInfo.totalResultCount,
+          ticketList: newTicketList
+        },
         errorMessage: null
       };
 
     case STATE_CHANGE_ERROR:
       return {
         ...state,
-        errorMessage: action.payload
+        errorMessage: action.payload.message
       };
 
     default:
