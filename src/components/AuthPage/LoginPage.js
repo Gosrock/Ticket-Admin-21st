@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { initializeForm, login } from '../../state/actions-creators';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import './loginpage.css';
+import './LoginPage.css';
 
 function LoginPage(props) {
   const dispatch = useDispatch();
