@@ -7,7 +7,6 @@ import { Table, Input, Select, Button, Avatar, Image } from 'antd';
 import moment from 'moment';
 import { changeState, ticketLookUp } from '../../state/actions-creators';
 import { StateIcon } from './StateIcon';
-import { ticket } from '../../state/reducers/ticket';
 const { Column } = Table;
 const { Option } = Select;
 
