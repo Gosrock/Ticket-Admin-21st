@@ -1,0 +1,68 @@
+.StateIcon {
+  position: relative;
+  width: 90px;
+  height: 32px;
+  background-color: #f3f3f3;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.StateIcon-circle {
+  position: absolute;
+  width: 9.06px;
+  height: 9.06px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  left: 10px;
+}
+
+.StateIcon-info-four {
+  width: 54px;
+  left: 25px;
+  position: absolute;
+  height: 16px;
+  font-family: SF Pro Text;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 22px;
+  /* or 183% */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  letter-spacing: -0.408px;
+  color: #000000;
+}
+.StateIcon-info-five {
+  width: 60px;
+  left: 23px;
+  position: absolute;
+  height: 16px;
+  font-family: SF Pro Text;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 22px;
+  /* or 183% */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.408px;
+  color: #000000;
+}
+
+.StateIcon-background-blue {
+  background-color: rgb(68, 142, 247);
+}
+.StateIcon-background-green {
+  background-color: rgb(114, 194, 64);
+}
+.StateIcon-background-red {
+  background-color: rgb(236, 91, 86);
+}
+.StateIcon-background-yellow {
+  background-color: rgb(239, 176, 65);
+}
