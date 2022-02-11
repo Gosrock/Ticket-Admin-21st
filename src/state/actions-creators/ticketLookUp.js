@@ -6,13 +6,14 @@ import {
   STATE_CHANGE_ERROR
 } from '../action-types/ticketLookUp';
 import axios from 'axios';
-import TicketListUpPage from '../../components/TicketListUpPage/TicketListUpPage';
 
 export const ticketLookUp =
   ({ page, searchType, searchString }, callback) =>
   async dispatch => {
     try {
       dispatch({ type: TICKET_LOOKUP_PENDING });
+      if (searchString === 'O') searchString = '신청';
+      else if (searchString === 'X') searchString = '미신청';
 
       const params = {
         page: page,
