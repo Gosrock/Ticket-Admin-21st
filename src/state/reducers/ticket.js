@@ -1,7 +1,9 @@
 import {
   TICKET_LOOKUP,
   TICKET_LOOKUP_ERROR,
-  TICKET_LOOKUP_PENDING
+  TICKET_LOOKUP_PENDING,
+  STATE_CHANGE,
+  STATE_CHANGE_ERROR
 } from '../action-types/ticketLookUp';
 
 const INITIAL_STATE = {
@@ -27,6 +29,29 @@ export const ticket = (state = INITIAL_STATE, action) => {
         ...state,
         errorMessage: action.payload,
         pending: false
+      };
+
+    case STATE_CHANGE:
+      const newTicketList = state.ticketInfo.ticketList.map(element => {
+        if (element._id === action.payload._id) {
+          return action.payload;
+        }
+        return element;
+      });
+
+      return {
+        ...state,
+        ticketInfo: {
+          totalResultCount: state.ticketInfo.totalResultCount,
+          ticketList: newTicketList
+        },
+        errorMessage: null
+      };
+
+    case STATE_CHANGE_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload.message
       };
 
     default:

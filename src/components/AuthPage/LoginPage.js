@@ -53,7 +53,7 @@ function LoginPage(props) {
         }}
         onFinish={onSubmitHandler}
       >
-        <h2> 관리자 로그인</h2>
+        <h2>Login</h2>
         <Form.Item
           name="email"
           rules={[

@@ -1,15 +1,20 @@
 import {
   TICKET_LOOKUP,
   TICKET_LOOKUP_ERROR,
-  TICKET_LOOKUP_PENDING
+  TICKET_LOOKUP_PENDING,
+  STATE_CHANGE,
+  STATE_CHANGE_ERROR
 } from '../action-types/ticketLookUp';
 import axios from 'axios';
+import TicketListUpPage from '../../components/TicketListUpPage/TicketListUpPage';
 
 export const ticketLookUp =
   ({ page, searchType, searchString }, callback) =>
   async dispatch => {
     try {
       dispatch({ type: TICKET_LOOKUP_PENDING });
+      if (searchString === 'O') searchString = '신청';
+      else if (searchString === 'X') searchString = '미신청';
 
       const params = {
         page: page,
@@ -28,6 +33,31 @@ export const ticketLookUp =
         type: TICKET_LOOKUP_ERROR,
         payload: e.response.data.message
       });
-      console.log(e.response.data);
+    }
+  };
+
+export const changeState =
+  ({ _id, e }) =>
+  async dispatch => {
+    try {
+      console.log('status:', e);
+      console.log('_id:', _id);
+      /* const params = {
+        status: e,
+        _id: _id
+      }; */
+
+      const response = await axios.patch(`/admin/tickets/${_id}`, {
+        status: e,
+        _id: _id
+      });
+      console.log(response.data);
+      dispatch({ type: STATE_CHANGE, payload: response.data.data });
+    } catch (e) {
+      console.log(e);
+      dispatch({
+        type: STATE_CHANGE_ERROR,
+        payload: e.response.data
+      });
     }
   };
