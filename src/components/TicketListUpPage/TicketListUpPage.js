@@ -3,10 +3,13 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { userLookup } from '../../../../actions/userLookup';
 import { UserOutlined } from '@ant-design/icons';
-import { Table, Input, Select, Button, Avatar, Image } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Form, Table, Input, Select, Button, Avatar, Image, Modal } from 'antd';
 import moment from 'moment';
 import { changeState, ticketLookUp } from '../../state/actions-creators';
 import { StateIcon } from './StateIcon';
+import { TicketModal } from './modal';
+
 const { Column } = Table;
 const { Option } = Select;
 
@@ -17,6 +20,18 @@ function TicketListUpPage({ props }) {
   const [searchString, setsearchString] = useState('');
   const [searchType, setsearchType] = useState('');
   const [page, setPage] = useState('1');
+  const [ModalVisible, setModalVisible] = useState(false);
+
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setModalVisible(false);
+  };
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
 
   const onSelectHandler = e => {
     console.log(e);
@@ -58,6 +73,7 @@ function TicketListUpPage({ props }) {
         <Select defaultValue="선택하세요" onSelect={onSelectHandler}>
           <Option value="accountName">입금자명</Option>
           <Option value="phoneNumber">전화번호</Option>
+          <Option value="smallGroup">소모임</Option>
         </Select>
         <Input
           style={{ width: '50%' }}
@@ -66,6 +82,19 @@ function TicketListUpPage({ props }) {
           value={searchString}
         />
         <Button onClick={onSearchButtonClickHandler}> 검색 </Button>
+        <Button
+          style={{ display: 'inline-block', float: 'right' }}
+          type="primary"
+          onClick={showModal}
+        >
+          <PlusOutlined></PlusOutlined>
+          어드민 티켓 발급
+        </Button>
+        {ModalVisible && (
+          <Modal visible={ModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <TicketModal name="modal" />
+          </Modal>
+        )}
         <div style={{ marginBottom: '16px' }} />
 
         <Table
