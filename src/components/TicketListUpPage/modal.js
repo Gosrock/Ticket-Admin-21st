@@ -1,15 +1,14 @@
 import { Form, Input, Button, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 export const TicketModal = () => {
-  const [form] = Form.useForm();
-
   const onSubmitHandler = values => {
     const fetchData = async () => {
       try {
         const accountNameList = values.accountNameList;
-        console.log('newList:', accountNameList);
+
         const response = await axios.post('/admin/tickets', {
           accountNameList
         });
@@ -19,7 +18,6 @@ export const TicketModal = () => {
       }
     };
     fetchData();
-    form.resetFields(['dynamic_form_nest_item']);
   };
 
   return (
