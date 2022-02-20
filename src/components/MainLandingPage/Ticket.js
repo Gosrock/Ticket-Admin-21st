@@ -15,12 +15,7 @@ const Ticket = props => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/admin/tickets/info');
-        //const issuedTickets = request.data.issuedTickets;
-        //const salesProceeds = request.data.salesProceeds;
         setData(response.data.data);
-        //console.log(response.data.data.issuedTickets);
-        //console.log(response.data.data.salesProceeds);
-        //console.log();
       } catch (e) {
         console.log(e);
       }
