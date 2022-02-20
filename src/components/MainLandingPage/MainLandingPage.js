@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
+import { EnterCheck } from '../EnterCheckPage/EnterCheck';
 import TicketListUpPage from '../TicketListUpPage/TicketListUpPage';
 import history from '../../config/history';
 import Ticket from './Ticket';
@@ -93,7 +94,7 @@ const MainLandingPage = () => {
             <Routes>
               <Route exact path="/tickets" element={<TicketListUpPage />} />
               <Route exact path="/logout" element={<LogoutPage />} />
-              <Route exact path="/enter" element={<div>입장확인임다</div>} />
+              <Route exact path="/enter" element={<EnterCheck />} />
               <Route exact path="/statics" element={<Ticket />} />
               <Route path="*" element={<Navigate to="/statics" />} />
             </Routes>

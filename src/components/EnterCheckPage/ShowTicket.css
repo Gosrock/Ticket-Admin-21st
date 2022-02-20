@@ -1,0 +1,134 @@
+.ticket-background-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  max-width: 334px;
+  max-height: 463px;
+}
+
+.ticket-background {
+  position: absolute;
+
+  width: 100%;
+  /* height: 100%; */
+  z-index: 1;
+}
+
+.ticket-box-wrapper {
+  position: relative;
+
+  height: 72%;
+  width: 100%;
+}
+
+.ticket-box {
+  position: absolute;
+  width: 234px;
+  height: 234px;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  z-index: 2;
+}
+
+.ticket-container-true-b {
+  position: absolute;
+  width: 216px;
+  height: 216px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.ticket-container-true {
+  position: absolute;
+  width: 204px;
+  height: 204px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border-radius: 12px;
+  z-index: 4;
+}
+
+.ticket-container-true:before {
+  content: '';
+  position: absolute;
+  height: 150%;
+  width: 150%;
+  background-image: conic-gradient(#a7fddb 20deg, #66dc80 120deg);
+  border-radius: 12px;
+  animation: rotate 2s infinite linear;
+  z-index: 5;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.ticket-container-true:after {
+  content: '';
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border-radius: 8px;
+  width: 194px;
+  height: 194px;
+  z-index: 6;
+}
+
+.ticket-container-false {
+  position: absolute;
+  width: 204px;
+  height: 204px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0px 0px 0px 5px #646568;
+  border-radius: 12px;
+}
+.ticket-info-wrapper {
+  position: relative;
+  z-index: 6;
+  height: 28%;
+  width: 100%;
+}
+.ticket-info {
+  position: absolute;
+  width: 146px;
+  height: 55px;
+  top: 50%;
+  right: 63%;
+  transform: translate(50%, -50%);
+  font-family: SF Pro;
+  font-style: normal;
+  border-right: 2px solid #363636;
+}
+
+.ticket-logo {
+  position: absolute;
+  z-index: 10;
+  width: 49px;
+  height: 49px;
+  top: 53%;
+  right: 22.5%;
+  transform: translate(50%, -50%);
+}

@@ -28,9 +28,17 @@ function TicketListUpPage({ props }) {
 
   const handleOk = () => {
     setModalVisible(false);
+    dispatch(ticketLookUp({ page: 1, searchType: '', searchString: '' }));
   };
   const handleCancel = () => {
     setModalVisible(false);
+    dispatch(
+      ticketLookUp({
+        page: 1,
+        searchType: '',
+        searchString: ''
+      })
+    );
   };
 
   const onSelectHandler = e => {
