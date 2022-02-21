@@ -33,7 +33,11 @@ export const EnterList = ({ data }) => {
             <List.Item.Meta
               avatar={<GosrockLogo2 />}
               title={
-                <a href={`https://gosrock.link/tickets/${item.ticketInfo._id}`}>
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  href={`https://gosrock.link/tickets/${item.ticketInfo._id}`}
+                >
                   {item.ticketInfo.accountName}
                 </a>
               }
