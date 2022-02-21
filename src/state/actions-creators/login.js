@@ -32,6 +32,6 @@ export const login =
       history.push('/statics');
     } catch (e) {
       //400 ~
-      dispatch({ type: AUTH_LOGIN_ERROR, payload: '로그인 실패' });
+      dispatch({ type: AUTH_LOGIN_ERROR, payload: e.response.data.message });
     }
   };
