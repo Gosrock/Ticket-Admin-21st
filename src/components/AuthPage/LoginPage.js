@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { initializeForm, login } from '../../state/actions-creators';
@@ -10,7 +10,8 @@ function LoginPage(props) {
   const dispatch = useDispatch();
 
   const { errorMessage, pending } = useSelector(state => state.auth);
-
+  const [error, setError] = useState(null);
+  const [form] = Form.useForm();
   const onSubmitHandler = values => {
     // event.preventDefault();
     let body = {
@@ -24,11 +25,15 @@ function LoginPage(props) {
   };
 
   useEffect(() => {
-    console.log(errorMessage);
-    /*if (errorMessage && !pending) {
-      alert('로그인실패');
-    }*/
-  }, [errorMessage, pending]);
+    if (errorMessage) {
+      console.log(errorMessage);
+      if (errorMessage === '아이디비밀번호오류') {
+        setError('아이디/비밀번호 오류');
+        form.resetFields(['Id', 'password']);
+        return;
+      }
+    }
+  }, [form, errorMessage, setError]);
 
   useEffect(() => {
     dispatch(initializeForm());
@@ -46,6 +51,7 @@ function LoginPage(props) {
       }}
     >
       <Form
+        form={form}
         name="normal_login"
         className="login-form"
         initialValues={{
@@ -83,7 +89,19 @@ function LoginPage(props) {
             placeholder="Password"
           />
         </Form.Item>
-
+        {
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              color: 'red'
+            }}
+          >
+            {error}
+          </div>
+        }
         <Form.Item>
           <Button
             style={{ float: 'right' }}
