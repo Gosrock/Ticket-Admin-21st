@@ -3,7 +3,7 @@
 
 `온라인 예매 만들어서 빠른 입장 빠른 정산 할거야` 프로젝트 : **고스락 티켓** <br>
 
-어드민용 페이지입니다.<br>
+*어드민용 페이지입니다.*<br>
 
 <br><br>
 
@@ -20,7 +20,7 @@
 
 ## 티켓 현황 검색 기능
 입금자명, 전화번호, 소모임여부에 따른 검색기능 구현 <br>
-[티켓현황_검색기능](https://user-images.githubusercontent.com/76608338/155059797-cf82425b-d679-4dc5-a9a2-380a71f00a72.gif)
+![티켓현황_검색기능](https://user-images.githubusercontent.com/76608338/155059797-cf82425b-d679-4dc5-a9a2-380a71f00a72.gif)
 
 
 <br>
@@ -55,17 +55,17 @@
     </tr>
     <tr align="center">
         <td>
-            <img src="https://github.com/ImNM.png?size=100">
+            <img src="https://user-images.githubusercontent.com/76608338/155062594-f75e1755-9c2f-4d56-b360-65e85464c1de.png" width="100">
             <br>
             <a href="https://github.com/ImNM"><I>ImNM</I></a>
         </td>
         <td>
-            <img src="https://user-images.githubusercontent.com/76608338/155061100-4604bae5-c5c9-4143-94e3-966249e71c04.png?size=100">
+            <img src="https://user-images.githubusercontent.com/76608338/155061100-4604bae5-c5c9-4143-94e3-966249e71c04.png" width="100">
             <br>
             <a href="https://github.com/jaetak5053"><I>jaetak5053</I></a>
         </td>
         <td>
-            <img src="https://user-images.githubusercontent.com/76608338/155061207-bf97c0e8-95c9-4cf8-8875-9f70238853ec.png?size=100">
+            <img src="https://user-images.githubusercontent.com/76608338/155061207-bf97c0e8-95c9-4cf8-8875-9f70238853ec.png" width="100">
             <br>
             <a href="https://github.com/Jordizzin"><I>Jordizzin</I></a>
         </td>
